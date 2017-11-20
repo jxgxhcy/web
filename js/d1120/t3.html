@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 3px 15px;
+        }
+
+        th {
+            background: grey;
+        }
+
+        .w150 {
+            width: 150px;
+        }
+
+        .w60 {
+            width: 60px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var table = document.getElementsByTagName('table')[0];
+            var tbody = document.getElementsByTagName('tbody')[0];
+            var inputs = document.getElementsByTagName('input');
+            inputs[inputs.length - 1].onclick = addOne1;
+
+            function delOne(e) {//1
+                tbody.removeChild(e.target.parentNode.parentNode);
+            }
+
+            function delOne1(e) {//2
+                table.deleteRow(e.target.parentNode.parentNode.rowIndex);
+            }
+
+            function addOne() {//1
+                var obj = newOrder();
+                var tr = document.createElement('tr');
+                var td1 = document.createElement('td');
+                var td2 = document.createElement('td');
+                var td3 = document.createElement('td');
+                var td4 = document.createElement('td');
+                td1.innerHTML = obj.name;
+                tr.appendChild(td1);
+                td2.innerHTML = obj.count;
+                tr.appendChild(td2);
+                td3.innerHTML = obj.price;
+                tr.appendChild(td3);
+                var input = document.createElement('input');
+                input.type = 'button';
+                input.value = '删除';
+                input.onclick = delOne;
+                td4.appendChild(input);
+                tr.appendChild(td4);
+                tbody.appendChild(tr);
+            }
+
+            function addOne1() {//2
+                var obj = newOrder();
+                var tr = table.insertRow(table.rows.length - 1);
+                var td1 = tr.insertCell(0);
+                var td2 = tr.insertCell(1);
+                var td3 = tr.insertCell(2);
+                var td4 = tr.insertCell(3);
+                td1.innerHTML = obj.name;
+                td2.innerHTML = obj.count;
+                td3.innerHTML = obj.price;
+                var input = document.createElement('input');
+                input.type = 'button';
+                input.value = '删除';
+                input.onclick = delOne1;
+                td4.appendChild(input);
+            }
+
+        };;;;;;;
+
+        function newOrder() {
+            var obj = {
+                name: '新增订单' + Math.ceil(Math.random() * 100),
+                count: Math.ceil(Math.random() * 100) + '',
+                price: '￥' + Math.ceil(Math.random() * 100) + '.00'
+            };
+            return obj;
+        }
+
+    </script>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th class="w150">商品名称</th>
+        <th class="w60">数量</th>
+        <th class="w60">价格</th>
+        <th class="w60">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="4"><input type="button" value="增加订单"></td>
+    </tr>
+    </tfoot>
+</table>
+</body>
+</html>

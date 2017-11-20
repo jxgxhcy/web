@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div {
+            margin: 0 auto;
+            width: 360px;
+            height: 190px;
+            text-align: center;
+        }
+
+        span {
+            margin: 3px;
+            display: inline-block;
+            padding: 0 3px;
+            border: 1px solid gray;
+            cursor: default;
+        }
+
+        .red {
+            background: red;
+        }
+
+        .white {
+            background: white;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var index = 0;
+            var imgs = ["1.gif", "2.gif", "3.gif", "4.gif"];
+            var div = document.getElementsByTagName('div')[0];
+            var spans;
+
+            var dsq = setInterval(carousel, 1000);
+
+            for (var i = 0; i < imgs.length; i++) {
+                var span = document.createElement('span');
+                span.id = i;
+                span.innerHTML = i + 1 + '';
+                span.onmouseover = function (e) {
+                    selected(spans, e);
+                    clearInterval(dsq);
+                };
+                span.onmouseout = function () {
+                    dsq = setInterval(carousel, 1000);
+                };
+                div.appendChild(span);
+            }
+
+            function carousel() {
+                spans = document.getElementsByTagName('span');
+                selected(spans);
+            }
+
+            function selected(spans, e) {
+                spans[index == 0 ? imgs.length - 1 : index - 1].className = 'white';
+                if (e) {
+                    index = e.target.id;
+                }
+                spans[index].className = 'red';
+                div.style.background = 'url(' + imgs[index] + ')';
+                index++;
+                if (index == imgs.length) {
+                    index = 0;
+                }
+            }
+
+        }
+    </script>
+</head>
+<body>
+<div></div>
+</body>
+</html>

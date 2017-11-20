@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div {
+            text-align: center;
+            width: 500px;
+            margin: 50px auto;
+        }
+
+        span {
+            font-weight: bold;
+            font-size: 25px;
+            color: red;
+        }
+    </style>
+    <script>
+        var timeLeft = 2 * 60 * 60;//剩余2小时
+        function load() {//1
+            var span = document.getElementsByTagName('span')[0];
+            var dsq = setInterval(function () {
+                span.innerHTML = formatTime(timeLeft);
+                timeLeft--;
+                if (timeLeft < 0) {
+                    clearInterval(dsq);
+                }
+            }, 1000);
+        }
+        function load1() {//2
+            var span = document.getElementsByTagName('span')[0];
+            var dsq = setTimeout(function () {
+                span.innerHTML = formatTime(timeLeft);
+                timeLeft--;
+                if (timeLeft < 0) {
+                    clearTimeout(dsq);
+                    return;
+                }
+                return load1();
+            }, 1000);
+
+
+        }
+
+        function formatTime(num) {
+            var hh = Math.floor(num / 60 / 60);
+            var mm = Math.floor(num / 60 % 60);
+            var ss = num % 60;
+            var left = formatStr(hh) + ':' + formatStr(mm) + ':' + formatStr(ss);
+            return left;
+        }
+        function formatStr(num) {
+            if (num < 10) {
+                num = "0" + num;
+            }
+            return num;
+        }
+    </script>
+</head>
+<body onload="load()">
+<div>
+    当前场次 <span>02:00:00</span> 后结束抢购
+</div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .carousel {
+            margin: 0 auto;
+            width: 360px;
+            height: 190px;
+            position: relative;
+        }
+
+        .indi {
+            text-align: center;
+            position: absolute;
+            width: 100%;
+            z-index: 10;
+        }
+
+        img {
+            position: absolute;
+            display: block;
+        }
+
+        .z10 {
+            z-index: 10;
+        }
+
+        .z-10 {
+            z-index: -10;
+        }
+
+        span {
+            margin: 3px;
+            display: inline-block;
+            padding: 0 3px;
+            border: 1px solid gray;
+            cursor: default;
+        }
+
+        .red {
+            background: red;
+        }
+
+        .white {
+            background: white;
+        }
+    </style>
+    <script>
+        var index = 0;
+        var imgs = ['1.gif', '2.gif', '3.gif', '4.gif'];
+        window.onload = function () {
+            var carousel = document.getElementsByClassName('carousel')[0];
+            var indi = document.getElementsByClassName('indi')[0];
+            for (var i = 0; i < imgs.length; i++) {
+                var img = new Image();
+                img.id = 'img' + i
+                ;
+                img.src = imgs[i];
+                carousel.insertBefore(img, indi);
+                var span = document.createElement('span');
+                span.id = 'span' + i;
+                span.innerHTML = i + 1 + '';
+                span.onmouseover = function (e) {
+                    carousell(e);
+                    clearInterval(dsq);
+                };
+                span.onmouseout = function (e) {
+                    dsq = setInterval(carousell, 1000);
+                };;;;;;;;;
+                indi.appendChild(span);
+            }
+            var images = document.getElementsByTagName('img');
+            var spans = document.getElementsByTagName('span');
+
+            var dsq = setInterval(carousell, 1000);
+
+            function carousell(e) {
+                spans[index == 0 ? imgs.length - 1 : index - 1].className = 'white';
+                images[index == 0 ? imgs.length - 1 : index - 1].className = 'z-10';
+                if (e) {
+                    index = e.target.id.substring(e.target.id.length - 1);
+                }
+                spans[index].className = 'red';
+                images[index].className = 'z10';
+                index++;
+                if (index == imgs.length) {
+                    index = 0;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="carousel">
+    <div class="indi"></div>
+</div>
+</body>
+</html>
