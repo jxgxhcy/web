@@ -4,35 +4,66 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="js.js"></script>
-    <script>
-        window.onload = function () {
-            var p = document.getElementById('p');
-            var c = document.getElementById('c');
-            var d = document.getElementById('d');
-            for (var x in pcd.zone) {
-                var opt = new Option(pcd.zone[x].name, pcd.zone[x].id);
-                p.options.add(opt);
-            }
-
-            function select(e) {
-                if (!e.selectedIndex) {
-                    c.options
-                }
-            }
-
-        }
-
-    </script>
 </head>
 <body>
-<select id="p" onchange="select(this);">
-    <option>--请选择--</option>
+<select id="p" onchange="select(this)">
+    <option value="-1">--请选择--</option>
 </select>
-<select id="c">
-    <option>--请选择--</option>
+<select id="c" onchange="select(this)">
+    <option value="-1">--请选择--</option>
 </select>
-<select id="d">
-    <option>--请选择--</option>
+<select id="d" onchange="select(this)">
+    <option value="-1">--请选择--</option>
 </select>
+<script>
+    var p = document.getElementById('p');
+    var c = document.getElementById('c');
+    var d = document.getElementById('d');
+    var pIndex;
+    var cIndex;
+    var dIndex;
+
+    setOpt(p, pcd.zone);
+    function select(e) {
+        switch (e.id) {
+            case 'p':
+                for (pIndex = 0; pIndex < pcd.zone.length; pIndex++) {
+                    if (pcd.zone[pIndex].id == e.value) {
+                        break;
+                    }
+                }
+                clearOpt(c);
+                if (e.value != -1) {
+                    setOpt(c, pcd.zone[pIndex].zone);
+                }
+                break;
+            case 'c':
+                for (cIndex = 0; cIndex < pcd.zone[pIndex].zone.length; cIndex++) {
+                    if (pcd.zone[pIndex].zone[cIndex].id == e.value) {
+                        break;
+                    }
+                }
+                clearOpt(d);
+                if (e.value != -1) {
+                    setOpt(d, pcd.zone[pIndex].zone[cIndex].zone);
+                }
+                break;
+            case 'd':
+                alert(p.selectedOptions[0].innerHTML + '-' + c.selectedOptions[0].innerHTML + '-' + d.selectedOptions[0].innerHTML);
+                break;
+            default:
+                break;
+        }
+    }
+    function setOpt(ele, opts) {
+        for (var i = 0; i < opts.length; i++) {
+            var opt = new Option(opts[i].name, opts[i].id);
+            ele.options.add(opt);
+        }
+    }
+    function clearOpt(ele) {
+        ele.length = 1;
+    }
+</script>
 </body>
 </html>
