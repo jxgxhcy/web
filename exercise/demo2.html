@@ -5,12 +5,34 @@
     <title>Title</title>
     <script src="js.js"></script>
     <script>
-        function load() {
-            document.getElementById('p');
+        window.onload = function () {
+            var p = document.getElementById('p');
+            var c = document.getElementById('c');
+            var d = document.getElementById('d');
+            for (var x in pcd.zone) {
+                var opt = new Option(pcd.zone[x].name, pcd.zone[x].id);
+                p.options.add(opt);
+            }
+
+            function select(e) {
+                if (!e.selectedIndex) {
+                    c.options
+                }
+            }
+
         }
+
     </script>
 </head>
-<body onload="load()">
-    <select id="p"></select><select id="c"></select><select id="d"></select>
+<body>
+<select id="p" onchange="select(this);">
+    <option>--请选择--</option>
+</select>
+<select id="c">
+    <option>--请选择--</option>
+</select>
+<select id="d">
+    <option>--请选择--</option>
+</select>
 </body>
 </html>
