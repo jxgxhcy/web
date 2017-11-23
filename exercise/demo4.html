@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .tab {
+            display: inline-block;
+            text-align: center;
+            padding: 15px;
+            background: gray;
+            cursor: default;
+        }
+
+        .active {
+            background: darkgrey;
+            color: white;
+        }
+
+        .tab-content {
+            width: 400px;
+            height: 150px;
+            background-color: darkgrey;
+            position: relative;
+        }
+
+        .tab-content div {
+            height: 100%;
+            position: absolute;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var tabs = document.querySelectorAll('.tab');
+            var tabcs = document.querySelectorAll('.tab-content div');
+            select(0);
+            for (var i = tabs.length - 1; i >= 0; i--) {
+                tabs[i].onclick = function (e) {
+                    select(e.target.tabIndex);
+                }
+            }
+
+            function select(index) {
+                for (var i = 0; i < tabs.length; i++) {
+                    if (i == index) {
+                        tabs[i].className = 'tab active';
+                        tabcs[i].style.display = 'block';
+                    } else {
+                        tabs[i].className = 'tab';
+                        tabcs[i].style.display = 'none';
+                    }
+                }
+            }
+        }
+
+    </script>
+
+</head>
+<body>
+
+<div class="tab" tabindex="0">选项一</div>
+<div class="tab" tabindex="1">选项二</div>
+<div class="tab" tabindex="2">选项三</div>
+<div class="tab-content">
+    <div tabindex="0">内容一</div>
+    <div tabindex="1">内容二</div>
+    <div tabindex="2">内容三</div>
+</div>
+<script>
+
+</script>
+
+</body>
+</html>
