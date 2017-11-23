@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border: 1px solid gray;
+            width: 250px;
+        }
+
+        th, td {
+            border: 1px solid gray;
+        }
+
+        th td:first-child,
+        tr td:first-child {
+            width: 80px;
+        }
+
+
+    </style>
+
+    <script>
+        function selectAll(e) {
+            var ins = document.querySelectorAll('input');
+            for (var i = 1; i < ins.length - 1; i++) {
+                ins[i].checked = e.checked ? true : false;
+            }
+
+        }
+        function selectFan() {
+            var ins = document.querySelectorAll('input');
+            for (var i = 1; i < ins.length - 1; i++) {
+                ins[i].checked = ins[i].checked ? false : true;
+            }
+
+        }
+
+    </script>
+</head>
+<body>
+<table>
+    <tr>
+        <td><input type="checkbox" onclick="selectAll(this)">全选</td>
+        <td>复选框全选示例</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox">1</td>
+        <td>aaaaaaaaaa</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox">2</td>
+        <td>bbbbbbbbbb</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox">3</td>
+        <td>ccccccccc</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox">4</td>
+        <td>dddddddddd</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox">5</td>
+        <td>eeeeeeeeee</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" onclick="selectFan()">反选</td>
+        <td>反选示例</td>
+        <td></td>
+    </tr>
+</table>
+</body>
+</html>
