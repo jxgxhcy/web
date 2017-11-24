@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 2px;
+            width: 150px;
+            text-align: center;
+        }
+
+        th {
+            background: darkgray;
+        }
+
+        input[type=number] {
+            text-align: center;
+        }
+
+        input[type=button] {
+            margin: 0 3px;
+        }
+    </style>
+
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>商品名称</th>
+        <th>数量</th>
+        <th>价格</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>防滑真皮休闲鞋</td>
+        <td>12</td>
+        <td>￥568.50</td>
+        <td>
+            <input type="button" value="删除" onclick="delOne(this)"
+            ><input type="button" value="修改" onclick="upOne(this)">
+        </td>
+    </tr>
+    <tr>
+        <td>抗疲劳神奇钛项圈</td>
+        <td>2</td>
+        <td>￥49.00</td>
+        <td>
+            <input type="button" value="删除" onclick="delOne(this)"
+            ><input type="button" value="修改" onclick="upOne(this)">
+        </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="4"><input type="button" value="增加订单" onclick="addOne()"></td>
+    </tr>
+    </tfoot>
+</table>
+<script>
+    var table = document.querySelector('table');
+
+    function addOne() {
+        //1
+        var tr = table.insertRow(table.rows.length - 1);
+        var td1 = tr.insertCell(0);
+        td1.innerHTML = '新增订单' + Math.ceil(Math.random() * 100);
+        var td2 = tr.insertCell(1);
+        td2.innerHTML = '' + Math.ceil(Math.random() * 100);
+        var td3 = tr.insertCell(2);
+        td3.innerHTML = '￥' + Math.ceil(Math.random() * 100);
+        var td4 = tr.insertCell(3);
+        td4.innerHTML = `<input type="button" value="删除" onclick="delOne(this)"
+                            ><input type="button" value="修改" onclick="upOne(this)">`;
+        //2
+        /*var tr = document.createElement('tr');
+         var td1 = document.createElement('td');
+         td1.innerHTML = '新增订单' + Math.ceil(Math.random()*100);
+         var td2 = document.createElement('td');
+         td2.innerHTML = '' + Math.ceil(Math.random()*100);
+         var td3 = document.createElement('td');
+         td3.innerHTML = '￥' + Math.ceil(Math.random()*100) + '.00';
+         var td4 = document.createElement('td');
+         var input1 = document.createElement('input');
+         input1.type = 'button';
+         input1.value = '删除';
+         input1.onclick = function (e) {
+         delOne(e.target);
+         }
+         var input2 = document.createElement('input');
+         input2.type = 'button';
+         input2.value = '修改';
+         input2.onclick = function (e) {
+         upOne(e.target);
+         }
+         td4.appendChild(input1);
+         td4.appendChild(input2);
+         tr.appendChild(td1);
+         tr.appendChild(td2);
+         tr.appendChild(td3);
+         tr.appendChild(td4);
+         table.children[1].insertBefore(tr,table.children[1].children[table.children[1].lastElementChild]);*/
+    }
+
+    function delOne(e) {
+        //1
+        table.deleteRow(e.parentNode.parentNode.rowIndex);
+
+        //2
+        /*e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode);*/
+    }
+
+    function upOne(e) {
+        //1
+        e.setAttribute('value', '确定');
+        e.setAttribute('onclick', 'makeSure(this)');
+        var ele = table.rows[e.parentNode.parentNode.rowIndex].cells[1];
+        var count = ele.innerHTML;
+        ele.innerHTML = '<input type="number" min="1">';
+        ele.lastElementChild.value = count;
+
+        //2
+        /*e.value = '确定';
+         e.onclick = function (el) {
+         makeSure(el.target);
+         }
+         var input = document.createElement('input');
+         input.type='number';
+         input.min = '1';
+         input.value = e.parentNode.parentNode.children[1].innerHTML;
+         e.parentNode.parentNode.children[1].replaceChild(input,e.parentNode.parentNode.children[1].firstChild);*/
+    }
+
+    function makeSure(e) {
+        //1
+        e.setAttribute('value', '修改');
+        e.setAttribute('onclick', 'upOne(this)');
+        var ele = table.rows[e.parentNode.parentNode.rowIndex].cells[1];
+        ele.innerHTML = ele.lastElementChild.value;
+
+        //2
+        /*e.value = '修改';
+         e.onclick = function (el) {
+         upOne(el.target);
+         }
+         e.parentNode.parentNode.children[1].innerHTML = e.parentNode.parentNode.children[1].firstElementChild.value;*/
+    }
+</script>
+</body>
+</html>

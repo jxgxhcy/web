@@ -9,32 +9,51 @@
             width: 250px;
         }
 
-        th, td {
+        td {
             border: 1px solid gray;
         }
 
-        th td:first-child,
         tr td:first-child {
             width: 80px;
         }
 
+        tr:first-child {
+            background: yellow;
+        }
 
+        tr:last-child {
+            background: mediumspringgreen;
+        }
     </style>
 
     <script>
         function selectAll(e) {
             var ins = document.querySelectorAll('input');
             for (var i = 1; i < ins.length - 1; i++) {
-                ins[i].checked = e.checked ? true : false;
+                ins[i].checked = e.checked;
             }
-
+        }
+        function selectAll1(e) {
+            var ins = document.querySelectorAll('input');
+            ins.set
         }
         function selectFan() {
             var ins = document.querySelectorAll('input');
             for (var i = 1; i < ins.length - 1; i++) {
-                ins[i].checked = ins[i].checked ? false : true;
+                ins[i].checked = !ins[i].checked;
             }
-
+            clck();
+        }
+        function clck() {
+            var ins = document.querySelectorAll('input');
+            var allChecked = true;
+            for (var i = 1; i < ins.length - 1; i++) {
+                if (!ins[i].checked) {
+                    allChecked = false;
+                    break;
+                }
+            }
+            ins[0].checked = allChecked;
         }
 
     </script>
@@ -42,37 +61,37 @@
 <body>
 <table>
     <tr>
-        <td><input type="checkbox" onclick="selectAll(this)">全选</td>
+        <td><input id="a" type="checkbox" onclick="selectAll(this)"><label for="a">全选</label></td>
         <td>复选框全选示例</td>
         <td></td>
     </tr>
     <tr>
-        <td><input type="checkbox">1</td>
-        <td>aaaaaaaaaa</td>
+        <td><input type="checkbox" onclick="clck()">1</td>
+        <td>aaaaaaaa</td>
         <td></td>
     </tr>
     <tr>
-        <td><input type="checkbox">2</td>
-        <td>bbbbbbbbbb</td>
+        <td><input type="checkbox" onclick="clck()">2</td>
+        <td>bbbbbbb</td>
         <td></td>
     </tr>
     <tr>
-        <td><input type="checkbox">3</td>
+        <td><input type="checkbox" onclick="clck()">3</td>
         <td>ccccccccc</td>
         <td></td>
     </tr>
     <tr>
-        <td><input type="checkbox">4</td>
-        <td>dddddddddd</td>
+        <td><input type="checkbox" onclick="clck()">4</td>
+        <td>ddddddd</td>
         <td></td>
     </tr>
     <tr>
-        <td><input type="checkbox">5</td>
-        <td>eeeeeeeeee</td>
+        <td><input type="checkbox" onclick="clck()">5</td>
+        <td>eeeeeeee</td>
         <td></td>
     </tr>
     <tr>
-        <td><input type="checkbox" onclick="selectFan()">反选</td>
+        <td><input id="b" type="checkbox" onclick="selectFan()"><label for="b">反选</label></td>
         <td>反选示例</td>
         <td></td>
     </tr>
