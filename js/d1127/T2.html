@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .container{
+            margin: 20px auto;
+            width: 450px;
+            height: 400px;
+            background: #1c85b4 url('img8/banner.jpg') no-repeat top;
+        }
+        form{
+            text-align: center;
+            color: white;
+            margin: 0 auto;
+            padding-top: 160px;
+            line-height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form>
+            请选择游戏类别：<select name="cate"></select><br/>
+            请选择游戏名称：<select name="game" ></select><br/>
+            <input type="image" src="img8/login.gif">
+        </form>
+    </div>
+    <script>
+        //11
+        var form = document.forms[0];
+        var games = new Array();
+        games['纸牌游戏'] = ['斗地主','红心大战','斗牛'];
+        games['棋牌游戏'] = ['五子棋','国际象棋','飞行棋'];
+
+        setOpt(form.cate,games,0);
+        setOpt(form.game,games[form.cate.value],1);
+
+        function setOpt(ele,opts,type){
+            clearOpt(ele);
+            for (var obj in opts) {
+                var option = (type==0?new Option(obj,obj):new Option(opts[obj]));
+                ele.add(option,null);
+            }
+        }
+         form.cate.onchange = function(){
+         setOpt(form.game,games[this.value],1);
+         }
+
+        //22
+        /*var games = {
+            name:'游戏大全',
+            cates:[
+                {
+                    id:1,
+                    name:'棋牌游戏',
+                    games:[
+                        {
+                            id:11,
+                            name:'五子棋'
+                        },{
+                            id:12,
+                            name:'飞行棋'
+                        },{
+                            id:13,
+                            name:'国际象棋'
+                        }
+                    ]
+
+                },{
+                    id:2,
+                    name:'纸牌游戏',
+                    games:[
+                        {
+                            id:21,
+                            name:'斗地主'
+                        },{
+                            id:22,
+                            name:'斗牛'
+                        },{
+                            id:23,
+                            name:'红心大战'
+                        }
+                    ]
+                }
+            ]
+        };
+        var form = document.forms[0];
+        form.cate.onchange = function(e){
+            setOpt(form.game,games.cates[form.cate.selectedIndex].games);
+        }
+
+        setOpt(form.cate,games.cates);
+        setOpt(form.game,games.cates[form.cate.selectedIndex].games);
+
+        function setOpt(ele,opts){
+            clearOpt(ele);
+            for (var obj in opts) {
+                ele.add(new Option(opts[obj].name,opts[obj].id),null);
+            }
+        }*/
+
+        function clearOpt(ele){
+            ele.length = 0;
+        }
+
+
+    </script>
+</body>
+</html>
