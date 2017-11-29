@@ -2,9 +2,98 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Title</title>
+    <style>
+        * {
+            font-size: 16px;
+        }
+
+        label {
+            display: inline-block;
+            text-align: right;
+            line-height: 28px;
+            padding-right: 3px;
+            font-weight: bold;
+        }
+
+        span {
+            color: red;
+            font-size: 14px;
+        }
+
+        .w80 {
+            width: 80px;
+        }
+    </style>
 </head>
 <body>
+<form method="post">
+    <label class="w80">用户名: </label><input type="text" name="user"
+                                           required><span>&nbsp;&nbsp;用户名不正确，用户长度为6-16位</span><br/>
+    <label class="w80">Email地址: </label><input name="email"><span>&nbsp;&nbsp;Email格式不正确，例如web@sohu.com</span><br/>
+    <label class="w80">手机号码: </label><input name="tel"><span>&nbsp;&nbsp;手机号码不正确，请重新输入</span><br/>
+    <label class="w80">登录密码: </label><input type="password" name="pwd"
+                                            required><span>&nbsp;&nbsp;密码不能含有非法字符，长度在4-10之间</span><br/>
+    <label class="w80">确认密码: </label><input type="password" name="c_pwd"
+                                            required><span>&nbsp;&nbsp;两次密码输入不一致</span><br/>
+    <label class="w80"></label><input type="image" src="img8/login.jpg">
+</form>
+
+<script>
+    var form = document.forms[0];
+    var spans = document.querySelectorAll('span');
+    var user_reg = /^\w{6,16}$/;
+    var eamil_reg = /^\w{3,16}@\w{1,5}(\.[a-zA-Z0-9]+)*(\.[a-zA-Z]+)$/;
+    var tel_reg = /^(13[0-9]|14[5|7|9]|15[0-3|5-9]|17[0-3|5-9]|18[0-3|5-9])\d{8}$/;
+    var pwd_reg = /^\w{4,10}$/;
+
+    for (var i = 0; i < spans.length; i++) {
+        spans[i].style.display = 'none';
+    }
+
+    form.onsubmit = function () {
+        var result = true;
+        if (!validate(user_reg, form.user.value)) {
+            spans[0].style.display = 'inline';
+            result = false;
+        } else {
+            spans[0].style.display = 'none';
+        }
+        if (!validate(eamil_reg, form.email.value)) {
+            spans[1].style.display = 'inline';
+            result = false;
+        } else {
+            spans[1].style.display = 'none';
+        }
+        if (!validate(tel_reg, form.tel.value)) {
+            spans[2].style.display = 'inline';
+            result = false;
+        } else {
+            spans[2].style.display = 'none';
+        }
+        if (!validate(pwd_reg, form.pwd.value)) {
+            spans[3].style.display = 'inline';
+            result = false;
+        } else {
+            spans[3].style.display = 'none';
+        }
+        if (form.c_pwd.value != form.pwd.value) {
+            spans[4].style.display = 'inline';
+            result = false;
+        } else {
+            spans[4].style.display = 'none';
+        }
+        if (!result) {
+            return false;
+        }
+
+        //to do
+    };;;;;;;;;;
+
+    function validate(reg, value) {
+        return reg.test(value);
+    }
+</script>
 
 </body>
 </html>

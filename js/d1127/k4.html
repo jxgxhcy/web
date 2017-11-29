@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            font-size: 25px;
+            line-height: 50px;
+        }
+
+        .ad {
+            width: 360px;
+            height: 190px;
+            z-index: 10;
+            top: 100px;
+            left: 100px;
+            position: absolute;
+        }
+
+        .del {
+            display: inline-block;
+            text-align: center;
+            background: red;
+            position: absolute;
+            right: 0;
+            top: 0;
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+<pre>
+        a b c d e f g h i j k l m n o p q r s t u v w x y z a b c d e f g h i j k l m n o p q r s t u v w x y z a b c d e f g h i j k l m n o p q r s t u v w x y z
+        b
+        c
+        d
+        e
+        f
+        g
+        h
+        i
+        j
+        k
+        l
+        m
+        n
+        o
+        p
+        q
+        r
+        s
+        t
+        u
+        v
+        w
+        x
+        y
+        z
+    </pre>
+<div class="ad">
+    <img src="../d1120/1.gif" alt="广告" title="广告">
+    <a class="del" onclick="delAd(this)">×</a>
+</div>
+<div class="ad">
+    <img src="../d1120/1.gif" alt="广告" title="广告">
+    <a class="del" onclick="delAd(this)">×</a>
+</div>
+<script>
+    let ad = document.querySelector('.ad');
+    let ad1 = document.querySelectorAll('.ad')[1];
+    ad1.style.position = 'fixed';
+    ad1.style.top = '300px';
+    let ad_top = parseInt(getComputedStyle(ad, null).top);
+    let ad_left = parseInt(getComputedStyle(ad, null).left);
+    function delAd(e) {
+        e.parentNode.style.display = 'none';
+    }
+
+    window.onscroll = function () {
+        ad.style.top = ad_top + parseInt(document.documentElement.scrollTop) + 'px';
+        ad.style.left = ad_left + parseInt(document.documentElement.scrollLeft) + 'px';
+    }
+</script>
+</body>
+</html>
