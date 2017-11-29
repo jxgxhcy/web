@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<pre>
+    通过正则表达式验证邮箱格式：
+        1：必须带有@符号
+        2：必须带有.符号
+        3：@符号前必须有3-16位的数字或者字母
+        4：@符号和.符号之间必须有1-5个字符
+        5：.符号不能出现在邮箱的结尾
+    <form>
+        邮箱：<input name="email" placeholder="请输入邮箱" required pattern='^[0-9A-Za-z]{3,16}@[0-9a-zA-Z-_]{1,5}(\.[a-zA-Z0-9]+)*(\.[A-Za-z]+)$'>
+
+              <input type="submit" value="验证">
+    </form>
+    <form>
+        邮箱：<input name="email" placeholder="请输入邮箱" required>
+
+              <input name="button" type="button" value="验证">
+    </form>
+</pre>
+    <script>
+        var form = document.forms[1];
+        var reg =/^[0-9A-Za-z]{3,16}@[0-9a-zA-Z-_]{1,5}(\.[a-zA-Z0-9]+)*(\.[A-Za-z]+)$/;
+        form.button.onclick = function(){
+            var email = form.email.value;
+            if(!reg.test(email)){
+                alert('邮箱不合法！');
+                return;
+            }
+            form.submit();
+        }
+
+    </script>
+</body>
+</html>

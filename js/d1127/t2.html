@@ -30,7 +30,7 @@
     <script>
         //11
         var form = document.forms[0];
-        var games = new Array();
+        var games = [];
         games['纸牌游戏'] = ['斗地主','红心大战','斗牛'];
         games['棋牌游戏'] = ['五子棋','国际象棋','飞行棋'];
 
@@ -46,8 +46,7 @@
         }
          form.cate.onchange = function(){
          setOpt(form.game,games[this.value],1);
-         }
-
+         };
         //22
         /*var games = {
             name:'游戏大全',
